@@ -3,10 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AdditionalEducation"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             StartupUri="MainWindow.xaml"
-             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+             StartupUri="Windws/Auth.xaml"
+             xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
         <ResourceDictionary>
+            <Style x:Key="CustomFont">
+                <Setter Property="TextElement.FontFamily" Value="/Fonts/#JetBrains MonoBold"/>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="8"/>
+            </Style>
+            <Style TargetType="material:Card">
+                <Setter Property="Background" Value="#908282"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth5"/>
+                <Setter Property="materialDesign:ShadowAssist.ShadowEdges" Value="All"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#434343"/>
+                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontFamily" Value="Poppins"/>
+                <Setter Property="material:ButtonAssist.CornerRadius" Value="3"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Height" Value="45"/>
+                <Setter Property="IsEnabled" Value="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="MaxLength" Value="100"/>
+                <Setter Property="MaxWidth" Value="200"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Height" Value="45"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="MaxLength" Value="100"/>
+                <Setter Property="FontFamily" Value="Poppins"/>
+                <Setter Property="Foreground" Value="#252525"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="material:PackIcon">
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>

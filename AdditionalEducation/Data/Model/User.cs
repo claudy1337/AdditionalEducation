@@ -20,6 +20,7 @@ namespace AdditionalEducation.Data.Model
         public string Patronymic { get; set; }
         public int RoleID { get; set; }
         public int AuthorizationID { get; set; }
+        public byte[] Image { get; set; }
     
         public virtual Authorization Authorization { get; set; }
         public virtual Role Role { get; set; }

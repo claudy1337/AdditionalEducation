@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdditionalEducation.Data.Classes;
+using AdditionalEducation.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,48 @@ namespace AdditionalEducation.Windws
     /// </summary>
     public partial class Auth : Window
     {
+        public static User CurrentUser;
         public Auth()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (e.ChangedButton == MouseButton.Left)
+                    this.DragMove();
+            }
+            catch (System.InvalidOperationException)
+            {
+                return;
+            }
+        }
+
+        private void btnAuth_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtLogin.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("заполните все поля");
+                return;
+            }
+            else
+            {
+                if (DBMethodsFromUser.IsCorrectUser(txtLogin.Text, txtPassword.Text))
+                {
+                    CurrentUser = DBMethodsFromUser.CurrentUser;
+                    MainWindow main = new MainWindow(CurrentUser);
+                    MessageBox.Show($"Welcome: {CurrentUser.Name}");
+                    main.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("не верные данные");
+                    return;
+                }
+            }
         }
     }
 }

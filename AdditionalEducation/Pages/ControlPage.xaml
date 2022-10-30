@@ -1,0 +1,53 @@
+﻿<Page x:Class="AdditionalEducation.Pages.ControlPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdditionalEducation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="480" d:DesignWidth="830"
+      Title="ControlPage"
+      FontFamily="Poppins"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#908282"/>
+            <Setter Property="FontFamily" Value="Poppins"/>
+        </Style>
+    </Page.Resources>
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="txtAddSection"
+                           Text="Section" 
+                           MouseLeftButtonDown="txtAddSection_MouseLeftButtonDown"
+                           FontSize="25"/>
+                <TextBlock x:Name="txtAddTeacher"
+                           MouseLeftButtonDown="txtAddTeacher_MouseLeftButtonDown"
+                           Text="Teacher" 
+                           FontSize="25"
+                           Margin="25,0,25,0"/>
+                <TextBlock x:Name="txtAddClass"
+                           MouseLeftButtonDown="txtAddClass_MouseLeftButtonDown"
+                           Text="Class" 
+                           FontSize="25"/>
+                <TextBlock x:Name="txtAddTimetable"
+                           MouseLeftButtonDown="txtAddTimetable_MouseLeftButtonDown"
+                           Text="Timetable" 
+                           FontSize="25"
+                           Margin="25,0,0,0"/>
+            </StackPanel>
+            <Frame 
+               BorderBrush="Transparent"
+               Grid.Row="2"
+               Name="fContainer"
+               NavigationUIVisibility="Hidden" Height="390"
+               Width="830"/>
+        </Grid>
+    </Border>
+</Page>

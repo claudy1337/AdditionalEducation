@@ -32,6 +32,9 @@
         <AssociationConnector Association="schoolModel.FK_Section_Student_Section" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.FK_Section_Student_Student" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.Section_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="schoolModel.FK_Teacher_User" />
+        <EntityTypeShape EntityType="schoolModel.TypeTeacher" Width="1.5" PointX="6.375" PointY="0.875" />
+        <AssociationConnector Association="schoolModel.FK_Teacher_TypeTeacher" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

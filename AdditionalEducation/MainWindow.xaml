@@ -46,7 +46,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                         <TextBlock x:Name="txtCreate"
-                                   Text="Create"
+                                   Text="Сontrol"
                                    FontSize="25"
                                    MouseLeftButtonDown="txtCreate_MouseLeftButtonDown"/>
 

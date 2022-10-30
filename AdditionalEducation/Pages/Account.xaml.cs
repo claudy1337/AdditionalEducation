@@ -35,26 +35,6 @@ namespace AdditionalEducation.Pages
             }
             BindingData();
         }
-
-        private void btnEdit_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text) || 
-                    string.IsNullOrWhiteSpace(txtPatronymic.Text) || string.IsNullOrWhiteSpace(txtSurname.Text)) 
-                {
-                    MessageBox.Show("заполните все поля");
-                }
-                else
-                {
-                    DBMethodsFromUser.EditAccount(CurrentUser, txtName.Text, txtSurname.Text, txtPatronymic.Text);
-                }
-            }
-            catch(FormatException)
-            {
-                return;
-            }
-        }
         private void BindingData()
         {
             if (CurrentUser.Image == null)
@@ -68,6 +48,26 @@ namespace AdditionalEducation.Pages
         {
             DBMethodsFromUser.EditImageUser(CurrentUser);
             NavigationService.Navigate(new Account(CurrentUser));
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                    string.IsNullOrWhiteSpace(txtPatronymic.Text) || string.IsNullOrWhiteSpace(txtSurname.Text))
+                {
+                    MessageBox.Show("заполните все поля");
+                }
+                else
+                {
+                    DBMethodsFromUser.EditAccount(CurrentUser, txtName.Text, txtSurname.Text, txtPatronymic.Text);
+                }
+            }
+            catch (FormatException)
+            {
+                return;
+            }
         }
     }
 }

@@ -116,10 +116,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
-          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
-          <Property Name="Image" Type="image" />
+          <Property Name="idUser" Type="int" />
+          <Property Name="idTypeTeacher" Type="int" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
@@ -127,6 +125,13 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Time" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="TypeTeacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -284,6 +289,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Teacher_TypeTeacher">
+          <End Role="TypeTeacher" Type="Self.TypeTeacher" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTeacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="idTypeTeacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Authorization">
           <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -323,6 +352,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Time" EntityType="Self.Time" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeTeacher" EntityType="Self.TypeTeacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_History_Cabinet" Association="Self.FK_History_Cabinet">
             <End Role="Cabinet" EntitySet="Cabinet" />
@@ -371,6 +401,14 @@
           <AssociationSet Name="FK_Student_Class" Association="Self.FK_Student_Class">
             <End Role="Class" EntitySet="Class" />
             <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_TypeTeacher" Association="Self.FK_Teacher_TypeTeacher">
+            <End Role="TypeTeacher" EntitySet="TypeTeacher" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_User" Association="Self.FK_Teacher_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Authorization" Association="Self.FK_User_Authorization">
             <End Role="Authorization" EntitySet="Authorization" />
@@ -509,12 +547,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="History" Relationship="Self.FK_History_Teacher" FromRole="Teacher" ToRole="History" />
           <NavigationProperty Name="Section" Relationship="Self.Section_Teacher" FromRole="Teacher" ToRole="Section" />
+          <Property Name="idUser" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="schoolModel.FK_Teacher_User" FromRole="Teacher" ToRole="User" />
+          <Property Name="idTypeTeacher" Type="Int32" />
+          <NavigationProperty Name="TypeTeacher" Relationship="schoolModel.FK_Teacher_TypeTeacher" FromRole="Teacher" ToRole="TypeTeacher" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
@@ -537,6 +575,7 @@
           <NavigationProperty Name="Authorization" Relationship="Self.FK_User_Authorization" FromRole="User" ToRole="Authorization" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Teacher" Relationship="schoolModel.FK_Teacher_User" FromRole="User" ToRole="Teacher" />
         </EntityType>
         <Association Name="FK_User_Authorization">
           <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
@@ -753,7 +792,48 @@
             <End Role="Section" EntitySet="Section" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
+          <AssociationSet Name="FK_Teacher_User" Association="schoolModel.FK_Teacher_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
+          <EntitySet Name="TypeTeacher" EntityType="schoolModel.TypeTeacher" />
+          <AssociationSet Name="FK_Teacher_TypeTeacher" Association="schoolModel.FK_Teacher_TypeTeacher">
+            <End Role="TypeTeacher" EntitySet="TypeTeacher" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Teacher_User">
+          <End Type="schoolModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="schoolModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TypeTeacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Teacher" Relationship="schoolModel.FK_Teacher_TypeTeacher" FromRole="TypeTeacher" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_Teacher_TypeTeacher">
+          <End Type="schoolModel.TypeTeacher" Role="TypeTeacher" Multiplicity="0..1" />
+          <End Type="schoolModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeTeacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="idTypeTeacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -871,11 +951,9 @@
           <EntitySetMapping Name="Teacher">
             <EntityTypeMapping TypeName="schoolModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="idTypeTeacher" ColumnName="idTypeTeacher" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -908,6 +986,14 @@
               <ScalarProperty Name="ID" ColumnName="TeacherID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="TypeTeacher">
+            <EntityTypeMapping TypeName="schoolModel.TypeTeacher">
+              <MappingFragment StoreEntitySet="TypeTeacher">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

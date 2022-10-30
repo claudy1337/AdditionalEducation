@@ -22,10 +22,6 @@ namespace AdditionalEducation.Data.Classes
         {
             return new ObservableCollection<Authorization>(DBConnection.connect.Authorization);
         }
-        public static IEnumerable<User> GetUser()
-        {
-            return GetUsers().ToList();
-        }
         public static User GetUser(string login, string password)
         {
             return GetUsers().FirstOrDefault(u => u.Authorization.Login == login && u.Authorization.Password == password);
@@ -72,42 +68,6 @@ namespace AdditionalEducation.Data.Classes
                 MessageBox.Show("данные успешно поменялись");
             }
         }
-        //public static void AddAuth(string login, string password)
-        //{
-        //    var getUser = GetUser(login, password);
-        //    var getAdminRole = GetAdminRole(login);
-        //    if (getAdminRole == false && getUser == null)
-        //    {
-        //        Authorization auth = new Authorization
-        //        {
-        //            Login = login,
-        //            Password = password
-        //        };
-        //        DBConnection.connect.Authorization.Add(auth);
-        //        DBConnection.connect.SaveChanges();
-        //    }
-        //    else
-        //        MessageBox.Show("данные уже есть");
-        //}
-        //public static void AddTeacher(string login, string password, string name, string surname, string patronymic, byte[] image)
-        //{
-        //    var getAdminRole = GetAdminRole(login);
-        //    var getAuth = GetAuthorization(login, password);
-        //    if (getAdminRole == false)
-        //    {
-        //        User user = new User
-        //        {
-        //            Name = name,
-        //            Surname = surname,
-        //            Patronymic = patronymic,
-        //            Image = image,
-        //            AuthorizationID = getAuth.ID,
-        //            RoleID = 2
-        //        };
-        //        DBConnection.connect.User.Add(user);
-        //        DBConnection.connect.SaveChanges();
-        //        MessageBox.Show("Учитель добавлен");
-        //    }
-        //}
+        
     }
 }

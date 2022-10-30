@@ -41,7 +41,7 @@
                     <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="btnEdit"
-                        MouseLeftButtonDown="btnEdit_MouseLeftButtonDown"
+                        Click="btnEdit_Click"
                         Grid.Row="1" 
                         Content="Edit"/>
                 <Image x:Name="imgUser" MouseLeftButtonDown="imgUser_MouseLeftButtonDown" Source="{Binding Image}" Grid.Row="0" Width="300" Height="300"/>

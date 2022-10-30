@@ -109,7 +109,7 @@ namespace AdditionalEducation
         private void txtCreate_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
+            fContainer.Navigate(new ControlPage(CurrentUser));
             txtCreate.Foreground = Brushes.White;
         }
 

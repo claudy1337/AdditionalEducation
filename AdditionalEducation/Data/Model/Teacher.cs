@@ -22,14 +22,14 @@ namespace AdditionalEducation.Data.Model
         }
     
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Patronymic { get; set; }
-        public byte[] Image { get; set; }
+        public Nullable<int> idUser { get; set; }
+        public Nullable<int> idTypeTeacher { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<History> History { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Section> Section { get; set; }
+        public virtual User User { get; set; }
+        public virtual TypeTeacher TypeTeacher { get; set; }
     }
 }

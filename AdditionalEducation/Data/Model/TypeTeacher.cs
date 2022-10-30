@@ -12,24 +12,17 @@ namespace AdditionalEducation.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class TypeTeacher
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public TypeTeacher()
         {
             this.Teacher = new HashSet<Teacher>();
         }
     
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Patronymic { get; set; }
-        public int RoleID { get; set; }
-        public int AuthorizationID { get; set; }
-        public byte[] Image { get; set; }
+        public int id { get; set; }
+        public string Type { get; set; }
     
-        public virtual Authorization Authorization { get; set; }
-        public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Teacher> Teacher { get; set; }
     }

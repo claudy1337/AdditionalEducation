@@ -69,9 +69,9 @@ namespace AdditionalEducation.Pages.AdminControl
             }
             else
             {
+                var selectType = cbTypeTeacher.SelectedIndex;
                 if (CurretTeacher.idUser == null || CurretTeacher.idTypeTeacher == null)
                 {
-                    var selectType = cbTypeTeacher.SelectedIndex;
                     DBMethodsFromUser.AddAuth(txtLogin.Text, txtPassword.Text);
                     DBMethodsFromUser.AddUser(image, txtName.Text, txtSurname.Text, txtPatronymic.Text);
                     DBMethodsFromTeacher.AddTeacher(selectType, isActive);
@@ -79,7 +79,11 @@ namespace AdditionalEducation.Pages.AdminControl
                 }
                 else
                 {
-                    //update;
+                    DBMethodsFromUser.EditImageUser(CurretTeacher.User);
+                    DBMethodsFromUser.EditAccount(CurretTeacher.User,txtName.Text, txtSurname.Text, txtPatronymic.Text);
+                    DBMethodsFromTeacher.EditTeacher(CurretTeacher, selectType, isActive);
+                    Refresh();
+
                 }
             }
         }

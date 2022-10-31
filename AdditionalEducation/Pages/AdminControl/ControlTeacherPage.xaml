@@ -42,7 +42,7 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Text="Login" Margin="0,0,0,5" FontSize="15"/>
-                            <TextBox x:Name="txtLogin" Text="{Binding User.Authorization.Login}"/>
+                            <TextBox x:Name="txtLogin" Text="{Binding User.Authorization.Login}" IsReadOnly="True"/>
                             <TextBlock Text="Password" Margin="0,10,0,5" FontSize="15"/>
                             <TextBox x:Name="txtPassword" Text="{Binding User.Authorization.Password}"/>
                             <TextBlock Text="Type" Margin="0,10,0,5" FontSize="15"/>

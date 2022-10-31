@@ -22,6 +22,7 @@ namespace AdditionalEducation.Pages.AdminControl
     /// </summary>
     public partial class TeacherPage : Page
     {
+        bool selectActive;
         public TeacherPage()
         {
             InitializeComponent();
@@ -41,13 +42,49 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void cbTypeTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+            if (cbActiveTeacher.SelectedIndex == 0)
+                selectActive = false;
+            else if (cbActiveTeacher.SelectedIndex == 1)
+                selectActive = true;
 
+            var selectType = cbTypeTeacher.SelectedItem as TypeTeacher;
+            if (cbActiveTeacher.SelectedIndex == -1)
+            {
+                lstvTeacher.ItemsSource = DBConnection.connect.Teacher.Where(t=>t.TypeTeacher.id == selectType.id).ToList();
+            }
+            else
+            {
+                lstvTeacher.ItemsSource = DBConnection.connect.Teacher.Where(t => t.TypeTeacher.id == selectType.id && t.isActive == selectActive).ToList();
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             Teacher teacher = new Teacher();
             NavigationService.Navigate(new ControlTeacherPage(teacher));
+        }
+
+        private void cbActiveTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbActiveTeacher.SelectedIndex == 0)
+                selectActive = false;
+            else if (cbActiveTeacher.SelectedIndex == 1)
+                selectActive = true;
+            var selectType = cbTypeTeacher.SelectedItem as TypeTeacher;
+            if (cbTypeTeacher.SelectedIndex == -1)
+            {
+                lstvTeacher.ItemsSource = DBConnection.connect.Teacher.Where(t => t.isActive == selectActive).ToList();
+            }
+            else
+            {
+                lstvTeacher.ItemsSource = DBConnection.connect.Teacher.Where(t => t.TypeTeacher.id == selectType.id && t.isActive == selectActive).ToList();
+            }
+        }
+
+        private void txtClear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new TeacherPage());
         }
     }
 }

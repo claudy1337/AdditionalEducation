@@ -17,6 +17,10 @@ namespace AdditionalEducation.Data.Classes
         {
             return new ObservableCollection<Teacher>(DBConnection.connect.Teacher);
         }
+        public static Teacher GetTeacher(string login, string password)
+        {
+            return GetTeachers().FirstOrDefault(t=>t.User.Authorization.Login == login && t.User.Authorization.Password == password);
+        }
         public static void AddTeacher(int typeTeacher, bool isActive)
         {
             var getAdmin = DBMethodsFromUser.GetAdminRole(DBMethodsFromUser.CurrentUser.Authorization.Login);
@@ -38,6 +42,17 @@ namespace AdditionalEducation.Data.Classes
                 MessageBox.Show("данные уже существуют");
                 return;
             }
+        }
+        public static void EditTeacher(Teacher Oldteacher, int typeTeacher, bool isActive)
+        {
+            var getTeacher = GetTeacher(Oldteacher.User.Authorization.Login, Oldteacher.User.Authorization.Password);
+            if (getTeacher != null)
+            {
+                getTeacher.idTypeTeacher = typeTeacher;
+                getTeacher.isActive = isActive;
+                DBConnection.connect.SaveChanges();
+            }
+
         }
 
     }

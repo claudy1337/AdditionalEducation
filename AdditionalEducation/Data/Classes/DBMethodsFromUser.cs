@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace AdditionalEducation.Data.Classes
     internal class DBMethodsFromUser
     {
         public static User CurrentUser;
+        public static Authorization CurrentAuthorization;
         public static ObservableCollection<User> GetUsers()
         {
             return new ObservableCollection<User>(DBConnection.connect.User);
@@ -66,6 +68,51 @@ namespace AdditionalEducation.Data.Classes
                 }
                 DBConnection.connect.SaveChanges();
                 MessageBox.Show("данные успешно поменялись");
+            }
+        }
+        public static void AddAuth(string login, string password)
+        {
+            var getAdmin = GetAdminRole(login);
+            var getAuth = GetAuthorization(login, password);
+            var getUser = GetUser(login, password);
+            if (getAdmin == false && getUser == null && getAuth == null)
+            {
+                Authorization auth = new Authorization
+                {
+                    Login = login,
+                    Password = password
+                };
+                CurrentAuthorization = auth;
+                DBConnection.connect.Authorization.Add(auth);
+                DBConnection.connect.SaveChanges();
+            }
+            
+        }
+        public static void AddUser(byte[] image, string name, string surname, string patronymic)
+        {
+            try
+            {
+                if (CurrentAuthorization != null)
+                {
+                    User user = new User
+                    {
+                        RoleID = 2,
+                        Name = name,
+                        Surname = surname,
+                        Patronymic = patronymic,
+                        Image = image,
+                        AuthorizationID = CurrentAuthorization.ID
+                    };
+                    CurrentUser = user;
+                    DBConnection.connect.User.Add(user);
+                    DBConnection.connect.SaveChanges();
+                }
+                else
+                    return;
+            }
+            catch(DbUpdateException)
+            {
+                return;
             }
         }
         

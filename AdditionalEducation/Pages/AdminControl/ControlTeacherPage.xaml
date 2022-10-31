@@ -34,17 +34,17 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Text="Name" FontSize="15" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding User.Name}"/>
+                            <TextBox x:Name="txtName" Text="{Binding User.Name}"/>
                             <TextBlock Text="Surname" FontSize="15" Margin="0,10,0,5"/>
-                            <TextBox Text="{Binding User.Surname}"/>
+                            <TextBox x:Name="txtSurname" Text="{Binding User.Surname}"/>
                             <TextBlock Text="Patronymic" FontSize="15" Margin="0,10,0,5"/>
-                            <TextBox Text="{Binding User.Patronymic}"/>
+                            <TextBox x:Name="txtPatronymic" Text="{Binding User.Patronymic}"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock Text="Login" Margin="0,0,0,5" FontSize="15"/>
-                            <TextBox Text="{Binding User.Authorization.Login}"/>
+                            <TextBox x:Name="txtLogin" Text="{Binding User.Authorization.Login}"/>
                             <TextBlock Text="Password" Margin="0,10,0,5" FontSize="15"/>
-                            <TextBox Text="{Binding User.Authorization.Password}"/>
+                            <TextBox x:Name="txtPassword" Text="{Binding User.Authorization.Password}"/>
                             <TextBlock Text="Type" Margin="0,10,0,5" FontSize="15"/>
                             <ComboBox x:Name="cbTypeTeacher" SelectionChanged="cbTypeTeacher_SelectionChanged" DisplayMemberPath="Type" Height="40">
                                 <ComboBox.ItemContainerStyle>
@@ -58,10 +58,19 @@
                     </Grid>
                 </StackPanel>
                 <TextBlock x:Name="txtEditOrAdd" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <Button  x:Name="btnEditOrAdd" 
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <CheckBox x:Name="CBIsActice" 
+                          Checked="CBIsActice_Checked"
+                          Margin="10,0,10,0" 
+                          Content="isActive" 
+                          Grid.Row="2" 
+                          Foreground="White" 
+                          FontSize="15"/>
+                    <Button  x:Name="btnEditOrAdd" 
                              Click="btnEditOrAdd_Click"
                              Grid.Row="2" VerticalAlignment="Center"/>
-                <CheckBox x:Name="CBIsActice" Margin="10,0,0,0" Content="isActive" Grid.Row="2" Foreground="White" FontSize="15"/>
+                   
+                </StackPanel>
             </Grid>
         </StackPanel>
         <Image Source="{Binding User.Image}" Grid.Column="1" Margin="10" RenderOptions.BitmapScalingMode="HighQuality" x:Name="imgTeacher" MouseLeftButtonDown="imgTeacher_MouseLeftButtonDown"/>

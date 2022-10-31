@@ -26,6 +26,7 @@ namespace AdditionalEducation.Pages.AdminControl
     {
         public static Teacher CurretTeacher;
         byte[] image;
+        bool isActive = false;
         bool imgClick = false;
         public ControlTeacherPage(Teacher currnetTeacher)
         {
@@ -60,7 +61,27 @@ namespace AdditionalEducation.Pages.AdminControl
         }
         private void btnEditOrAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text) || string.IsNullOrWhiteSpace(txtPatronymic.Text)
+                ||string.IsNullOrWhiteSpace(txtLogin.Text))
+            {
+                MessageBox.Show("заполните все данные");
+                return;
+            }
+            else
+            {
+                if (CurretTeacher.idUser == null || CurretTeacher.idTypeTeacher == null)
+                {
+                    var selectType = cbTypeTeacher.SelectedIndex;
+                    DBMethodsFromUser.AddAuth(txtLogin.Text, txtPassword.Text);
+                    DBMethodsFromUser.AddUser(image, txtName.Text, txtSurname.Text, txtPatronymic.Text);
+                    DBMethodsFromTeacher.AddTeacher(selectType, isActive);
+                    Refresh();
+                }
+                else
+                {
+                    //update;
+                }
+            }
         }
         private void imgTeacher_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -77,10 +98,19 @@ namespace AdditionalEducation.Pages.AdminControl
                 image = File.ReadAllBytes(ofd.FileName);
             }
         }
+        private void Refresh()
+        {
+            NavigationService.Navigate(new TeacherPage());
+        }
 
         private void cbTypeTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        private void CBIsActice_Checked(object sender, RoutedEventArgs e)
+        {
+            CBIsActice.IsChecked = true;
+            isActive = true;
         }
     }
 }

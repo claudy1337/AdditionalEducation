@@ -119,7 +119,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUser" Type="int" />
           <Property Name="idTypeTeacher" Type="int" />
-          <Property Name="isActive" Type="bit" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
@@ -556,7 +556,7 @@
           <NavigationProperty Name="User" Relationship="schoolModel.FK_Teacher_User" FromRole="Teacher" ToRole="User" />
           <Property Name="idTypeTeacher" Type="Int32" />
           <NavigationProperty Name="TypeTeacher" Relationship="schoolModel.FK_Teacher_TypeTeacher" FromRole="Teacher" ToRole="TypeTeacher" />
-          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Time">
           <Key>

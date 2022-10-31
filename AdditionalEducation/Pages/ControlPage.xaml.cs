@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AdditionalEducation.Data.Classes;
 using AdditionalEducation.Data.Model;
+using AdditionalEducation.Pages.AdminControl;
 
 namespace AdditionalEducation.Pages
 {
@@ -39,14 +40,13 @@ namespace AdditionalEducation.Pages
         private void txtAddTeacher_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
+            fContainerControl.Navigate(new TeacherPage());
             txtAddTeacher.Foreground = Brushes.White;
         }
 
         private void txtAddClass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
             txtAddClass.Foreground = Brushes.White;
         }
 

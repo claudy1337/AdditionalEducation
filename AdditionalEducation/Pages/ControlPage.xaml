@@ -45,7 +45,7 @@
             <Frame 
                BorderBrush="Transparent"
                Grid.Row="2"
-               Name="fContainer"
+               Name="fContainerControl"
                NavigationUIVisibility="Hidden" Height="390"
                Width="830"/>
         </Grid>

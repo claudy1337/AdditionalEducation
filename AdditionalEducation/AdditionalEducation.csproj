@@ -140,6 +140,18 @@
     <Compile Include="Pages\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdminControl\ClassPage.xaml.cs">
+      <DependentUpon>ClassPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminControl\SectionPage.xaml.cs">
+      <DependentUpon>SectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminControl\TeacherPage.xaml.cs">
+      <DependentUpon>TeacherPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminControl\TimetablePage.xaml.cs">
+      <DependentUpon>TimetablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ControlPage.xaml.cs">
       <DependentUpon>ControlPage.xaml</DependentUpon>
     </Compile>
@@ -159,6 +171,22 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Account.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminControl\ClassPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminControl\SectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminControl\TeacherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminControl\TimetablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,9 +236,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\AdminControl\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

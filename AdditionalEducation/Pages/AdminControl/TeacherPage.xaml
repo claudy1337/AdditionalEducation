@@ -1,0 +1,57 @@
+﻿<Page x:Class="AdditionalEducation.Pages.AdminControl.TeacherPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdditionalEducation.Pages.AdminControl"
+      mc:Ignorable="d"
+      FontFamily="Poppins"
+      d:DesignHeight="390" d:DesignWidth="830"
+      Title="TeacherPage"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Poppins"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10">
+            <Grid Height="370">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Add or Edit Teacher" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <StackPanel Grid.Row="1">
+                    
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Content="Add New"/>
+                    <TextBlock Text="Clear" HorizontalAlignment="Right" FontSize="20"/>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+        <ListView Grid.Column="1" Width="550" Height="370">
+            <Grid Width="530" Height="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" RenderOptions.BitmapScalingMode="HighQuality" Margin="10"/>
+                <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
+                    <TextBlock Text="Type Teacher" HorizontalAlignment="Center" FontSize="25"/>
+                    <TextBlock Text="Name" FontSize="25" Margin="0,15,0,0"/>
+                    <TextBlock Text="Surname" FontSize="25" Margin="0,15,0,15"/>
+                    <TextBlock Text="Patronymic" FontSize="25"/>
+                </StackPanel>
+            </Grid>
+        </ListView>
+    </Grid>
+</Page>

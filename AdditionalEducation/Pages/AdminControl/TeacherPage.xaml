@@ -27,31 +27,45 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Add or Edit Teacher" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <TextBlock Text="Add or Edit Teacher" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="22"/>
                 <StackPanel Grid.Row="1">
-                    
+                    <TextBlock Text="Type" FontSize="20"/>
+                    <ComboBox x:Name="cbTypeTeacher" SelectionChanged="cbTypeTeacher_SelectionChanged" DisplayMemberPath="Type" Height="40">
+                        <ComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="BorderBrush" Value="White"/>
+                                <Setter Property="Background" Value="#908282"/>
+                            </Style>
+                        </ComboBox.ItemContainerStyle>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Button Content="Add New"/>
-                    <TextBlock Text="Clear" HorizontalAlignment="Right" FontSize="20"/>
+                    <Button Content="Add New" x:Name="btnAdd" Click="btnAdd_Click"/>
+                    <TextBlock Text="Clear" HorizontalAlignment="Right" FontSize="15" Margin="0,5,0,0"/>
                 </StackPanel>
             </Grid>
 
         </StackPanel>
-        <ListView Grid.Column="1" Width="550" Height="370">
-            <Grid Width="530" Height="350">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" RenderOptions.BitmapScalingMode="HighQuality" Margin="10"/>
-                <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
-                    <TextBlock Text="Type Teacher" HorizontalAlignment="Center" FontSize="25"/>
-                    <TextBlock Text="Name" FontSize="25" Margin="0,15,0,0"/>
-                    <TextBlock Text="Surname" FontSize="25" Margin="0,15,0,15"/>
-                    <TextBlock Text="Patronymic" FontSize="25"/>
-                </StackPanel>
-            </Grid>
+        <ListView x:Name="lstvTeacher" Grid.Column="1" Width="550" Height="370" SelectionChanged="lstvTeacher_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="530" Height="350">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding User.Image}" Grid.Column="0" RenderOptions.BitmapScalingMode="HighQuality" Margin="10"/>
+                        <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
+                            <TextBlock Text="{Binding TypeTeacher.Type}" FontSize="25" Foreground="White"/>
+                            <TextBlock Text="{Binding User.Name}" FontSize="25" Margin="0,15,0,15" Foreground="White"/>
+                            <TextBlock Text="{Binding User.Surname}" FontSize="25" Margin="0,0,0,15" Foreground="White"/>
+                            <TextBlock Text="{Binding User.Patronymic}" FontSize="25" Foreground="White"/>
+                            <TextBlock Text="{Binding User.Authorization.Login}" FontSize="25" Foreground="White" Margin="0,15,0,15"/>
+                            <TextBlock Text="{Binding isActive}" FontSize="25" Foreground="White"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>

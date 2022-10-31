@@ -72,6 +72,7 @@
           <Property Name="MaxCountOfVisitors" Type="int" />
           <Property Name="ScheduleID" Type="int" Nullable="false" />
           <Property Name="Image" Type="image" />
+          <Property Name="isActive" Type="bit" />
         </EntityType>
         <EntityType Name="Section_Student">
           <Key>
@@ -118,6 +119,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUser" Type="int" />
           <Property Name="idTypeTeacher" Type="int" />
+          <Property Name="isActive" Type="bit" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
@@ -506,6 +508,7 @@
           <NavigationProperty Name="Schedule" Relationship="Self.FK_Section_Schedule" FromRole="Section" ToRole="Schedule" />
           <NavigationProperty Name="Section_Student" Relationship="Self.FK_Section_Student_Section" FromRole="Section" ToRole="Section_Student" />
           <NavigationProperty Name="Teacher" Relationship="Self.Section_Teacher" FromRole="Section" ToRole="Teacher" />
+          <Property Name="isActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Section_Student">
           <Key>
@@ -553,6 +556,7 @@
           <NavigationProperty Name="User" Relationship="schoolModel.FK_Teacher_User" FromRole="Teacher" ToRole="User" />
           <Property Name="idTypeTeacher" Type="Int32" />
           <NavigationProperty Name="TypeTeacher" Relationship="schoolModel.FK_Teacher_TypeTeacher" FromRole="Teacher" ToRole="TypeTeacher" />
+          <Property Name="isActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
@@ -907,6 +911,7 @@
           <EntitySetMapping Name="Section">
             <EntityTypeMapping TypeName="schoolModel.Section">
               <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CabinetID" ColumnName="CabinetID" />
@@ -951,6 +956,7 @@
           <EntitySetMapping Name="Teacher">
             <EntityTypeMapping TypeName="schoolModel.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="idTypeTeacher" ColumnName="idTypeTeacher" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

@@ -47,20 +47,21 @@ namespace AdditionalEducation.Pages
         private void txtAddClass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
+            fContainerControl.Navigate(new ClassPage());
             txtAddClass.Foreground = Brushes.White;
         }
 
         private void txtAddTimetable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
+            fContainerControl.Navigate(new TimetablePage());
             txtAddTimetable.Foreground = Brushes.White;
         }
 
         private void txtAddSection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
+            fContainerControl.Navigate(new SectionPage());
             txtAddSection.Foreground = Brushes.White;
         }
     }

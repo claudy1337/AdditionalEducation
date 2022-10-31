@@ -143,6 +143,9 @@
     <Compile Include="Pages\AdminControl\ClassPage.xaml.cs">
       <DependentUpon>ClassPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdminControl\ControlTeacherPage.xaml.cs">
+      <DependentUpon>ControlTeacherPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdminControl\SectionPage.xaml.cs">
       <DependentUpon>SectionPage.xaml</DependentUpon>
     </Compile>
@@ -175,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdminControl\ClassPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminControl\ControlTeacherPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

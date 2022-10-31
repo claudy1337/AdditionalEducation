@@ -27,6 +27,7 @@ namespace AdditionalEducation.Data.Model
         public Nullable<int> MaxCountOfVisitors { get; set; }
         public int ScheduleID { get; set; }
         public byte[] Image { get; set; }
+        public Nullable<bool> isActive { get; set; }
     
         public virtual Cabinet Cabinet { get; set; }
         public virtual Schedule Schedule { get; set; }

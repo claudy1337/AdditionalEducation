@@ -6,9 +6,65 @@
       xmlns:local="clr-namespace:AdditionalEducation.Pages.AdminControl"
       mc:Ignorable="d" 
       d:DesignHeight="390" d:DesignWidth="830"
-      Title="SectionPage">
+      Title="SectionPage"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
 
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Poppins"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10">
+            <Grid Height="370">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Add or Edit Section" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="22"/>
+                <StackPanel Grid.Row="1">
+
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Content="Add New"/>
+                    <TextBlock Text="Clear" HorizontalAlignment="Right" FontSize="15" Margin="0,5,0,0"/>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+        <ListView Grid.Column="1" Width="550" Height="370">
+            <Grid Width="530" Height="350">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" RenderOptions.BitmapScalingMode="HighQuality" Margin="10"/>
+                <StackPanel Grid.Column="1" Margin="10" Orientation="Vertical">
+                    <Grid Height="330">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Text="Title"/>
+                            <TextBlock Text="MaxCountOfVisitorsinet"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Text="Cabinet Information"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2">
+                            <TextBlock Text="Schedule Inforamtion"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ListView>
     </Grid>
 </Page>

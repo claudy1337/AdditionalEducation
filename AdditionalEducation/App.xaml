@@ -43,6 +43,13 @@
                 <Setter Property="TextAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
             </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="45"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
             <Style TargetType="material:PackIcon">
                 <Setter Property="Foreground" Value="White"/>
             </Style>

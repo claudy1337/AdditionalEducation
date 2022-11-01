@@ -43,9 +43,9 @@
                            Margin="25,0,25,0"/>
                 <TextBlock x:Name="txtAddAppoint"
                            MouseLeftButtonDown="txtAddAppoint_MouseLeftButtonDown"
-                           Text="Timetable" 
+                           Text="Appoint" 
                            FontSize="25"
-                           Margin="25,0,25,0"/>
+                           Margin="0,0,25,0"/>
             </StackPanel>
             <Frame 
                BorderBrush="Transparent"

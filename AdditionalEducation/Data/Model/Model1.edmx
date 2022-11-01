@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище schoolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище schoolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Authorization">
           <Key>
             <PropertyRef Name="ID" />
@@ -85,11 +85,12 @@
         </EntityType>
         <EntityType Name="Section_Teacher">
           <Key>
-            <PropertyRef Name="SectionID" />
-            <PropertyRef Name="TeacherID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="SectionID" Type="int" Nullable="false" />
-          <Property Name="TeacherID" Type="int" Nullable="false" />
+          <Property Name="idTeacher" Type="int" Nullable="false" />
+          <Property Name="idSection" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -282,7 +283,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Section_Teacher">
-              <PropertyRef Name="SectionID" />
+              <PropertyRef Name="idSection" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -294,7 +295,7 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Section_Teacher">
-              <PropertyRef Name="TeacherID" />
+              <PropertyRef Name="idTeacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -445,7 +446,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="schoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -533,7 +535,7 @@
           <NavigationProperty Name="Cabinet" Relationship="Self.FK_Section_Cabinet" FromRole="Section" ToRole="Cabinet" />
           <NavigationProperty Name="Schedule" Relationship="Self.FK_Section_Schedule" FromRole="Section" ToRole="Schedule" />
           <NavigationProperty Name="Section_Student" Relationship="Self.FK_Section_Student_Section" FromRole="Section" ToRole="Section_Student" />
-          <NavigationProperty Name="Teacher" Relationship="Self.Section_Teacher" FromRole="Section" ToRole="Teacher" />
+          <NavigationProperty Name="Section_Teacher" Relationship="Self.FK_Section_Teacher_Section" FromRole="Section" ToRole="Section_Teacher" />
         </EntityType>
         <EntityType Name="Section_Student">
           <Key>
@@ -545,6 +547,17 @@
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="Section" Relationship="Self.FK_Section_Student_Section" FromRole="Section_Student" ToRole="Section" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Section_Student_Student" FromRole="Section_Student" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Section_Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="idTeacher" Type="Int32" Nullable="false" />
+          <Property Name="idSection" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Section_Teacher_Section" FromRole="Section_Teacher" ToRole="Section" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Section_Teacher_Teacher" FromRole="Section_Teacher" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -579,9 +592,9 @@
           <Property Name="idTypeTeacher" Type="Int32" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="History" Relationship="Self.FK_History_Teacher" FromRole="Teacher" ToRole="History" />
+          <NavigationProperty Name="Section_Teacher" Relationship="Self.FK_Section_Teacher_Teacher" FromRole="Teacher" ToRole="Section_Teacher" />
           <NavigationProperty Name="TypeTeacher" Relationship="Self.FK_Teacher_TypeTeacher" FromRole="Teacher" ToRole="TypeTeacher" />
           <NavigationProperty Name="User" Relationship="Self.FK_Teacher_User" FromRole="Teacher" ToRole="User" />
-          <NavigationProperty Name="Section" Relationship="Self.Section_Teacher" FromRole="Teacher" ToRole="Section" />
         </EntityType>
         <EntityType Name="TimeHour">
           <Key>
@@ -766,6 +779,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Section_Teacher_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Section_Teacher" Type="Self.Section_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section_Teacher">
+              <PropertyRef Name="idSection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Section_Student_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Section_Student" Type="Self.Section_Student" Multiplicity="*" />
@@ -775,6 +800,18 @@
             </Principal>
             <Dependent Role="Section_Student">
               <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Section_Teacher_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Section_Teacher" Type="Self.Section_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section_Teacher">
+              <PropertyRef Name="idTeacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -802,10 +839,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Section_Teacher">
-          <End Role="Section" Type="Self.Section" Multiplicity="*" />
-          <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="schoolEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Authorization" EntityType="Self.Authorization" />
           <EntitySet Name="Cabinet" EntityType="Self.Cabinet" />
@@ -816,6 +849,7 @@
           <EntitySet Name="Schedule" EntityType="Self.Schedule" />
           <EntitySet Name="Section" EntityType="Self.Section" />
           <EntitySet Name="Section_Student" EntityType="Self.Section_Student" />
+          <EntitySet Name="Section_Teacher" EntityType="Self.Section_Teacher" />
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" />
@@ -871,9 +905,17 @@
             <End Role="Section" EntitySet="Section" />
             <End Role="Section_Student" EntitySet="Section_Student" />
           </AssociationSet>
+          <AssociationSet Name="FK_Section_Teacher_Section" Association="Self.FK_Section_Teacher_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Section_Teacher" EntitySet="Section_Teacher" />
+          </AssociationSet>
           <AssociationSet Name="FK_Section_Student_Student" Association="Self.FK_Section_Student_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Section_Student" EntitySet="Section_Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Section_Teacher_Teacher" Association="Self.FK_Section_Teacher_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Section_Teacher" EntitySet="Section_Teacher" />
           </AssociationSet>
           <AssociationSet Name="FK_Teacher_TypeTeacher" Association="Self.FK_Teacher_TypeTeacher">
             <End Role="TypeTeacher" EntitySet="TypeTeacher" />
@@ -881,10 +923,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Teacher_User" Association="Self.FK_Teacher_User">
             <End Role="User" EntitySet="User" />
-            <End Role="Teacher" EntitySet="Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="Section_Teacher" Association="Self.Section_Teacher">
-            <End Role="Section" EntitySet="Section" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
         </EntityContainer>
@@ -980,6 +1018,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Section_Teacher">
+            <EntityTypeMapping TypeName="schoolModel.Section_Teacher">
+              <MappingFragment StoreEntitySet="Section_Teacher">
+                <ScalarProperty Name="idTeacher" ColumnName="idTeacher" />
+                <ScalarProperty Name="idSection" ColumnName="idSection" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="schoolModel.Student">
               <MappingFragment StoreEntitySet="Student">
@@ -1050,14 +1098,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Section_Teacher" TypeName="schoolModel.Section_Teacher" StoreEntitySet="Section_Teacher">
-            <EndProperty Name="Section">
-              <ScalarProperty Name="ID" ColumnName="SectionID" />
-            </EndProperty>
-            <EndProperty Name="Teacher">
-              <ScalarProperty Name="ID" ColumnName="TeacherID" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -29,7 +29,7 @@
                     <RowDefinition Height="90"/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Add or Edit Section" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="22"/>
-                <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Text="sort"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">

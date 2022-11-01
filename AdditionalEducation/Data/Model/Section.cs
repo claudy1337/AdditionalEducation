@@ -18,7 +18,7 @@ namespace AdditionalEducation.Data.Model
         public Section()
         {
             this.Section_Student = new HashSet<Section_Student>();
-            this.Teacher = new HashSet<Teacher>();
+            this.Section_Teacher = new HashSet<Section_Teacher>();
         }
     
         public int ID { get; set; }
@@ -34,6 +34,6 @@ namespace AdditionalEducation.Data.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Section_Student> Section_Student { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher> Teacher { get; set; }
+        public virtual ICollection<Section_Teacher> Section_Teacher { get; set; }
     }
 }

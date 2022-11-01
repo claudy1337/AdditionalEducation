@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AdditionalEducation.Data.Model;
+using AdditionalEducation.Data.Classes;
 
 namespace AdditionalEducation.Pages.AdminControl
 {
@@ -23,6 +25,26 @@ namespace AdditionalEducation.Pages.AdminControl
         public AppointPage()
         {
             InitializeComponent();
+            BindingData();
+        }
+        private void BindingData()
+        {
+            cbSection.ItemsSource = DBConnection.connect.Section.ToList();
+            cbTeacher.ItemsSource = DBConnection.connect.Teacher.Where(t=>t.isActive == true).ToList();
+            lstvAppoint.ItemsSource = DBConnection.connect.Section_Teacher.ToList();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var selectSection = cbSection.SelectedItem as Data.Model.Section;
+            var selectTeacher = cbTeacher.SelectedItem as Teacher;
+            DBMethodsFromSectionTeacher.AddTeacherFromSection(selectSection.ID, selectTeacher.ID);
+        }
+
+        private void cbTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectTeacher = cbTeacher.SelectedItem as Teacher;
+            txtName.Text = $"{selectTeacher.User.Name}, {selectTeacher.User.Authorization.Login}";
         }
     }
 }

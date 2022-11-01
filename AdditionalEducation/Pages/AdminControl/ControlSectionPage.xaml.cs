@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using AdditionalEducation.Data.Model;
 using AdditionalEducation.Data.Classes;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.IO;
 
 namespace AdditionalEducation.Pages.AdminControl
 {
@@ -73,7 +75,7 @@ namespace AdditionalEducation.Pages.AdminControl
                 var getsched = DBMethodsFromShedule.GetSchedule(selectHour.id, selectMin.id, selectDay.ID);
                 if (getsched != null)
                 {
-                    DBMethodsFromSection.AddSection(txtTitle.Text, selectCabinet.ID, Convert.ToInt32(txtMaxCount.Text), getsched.ID, isCheck);
+                    DBMethodsFromSection.AddSection(txtTitle.Text, selectCabinet.ID, Convert.ToInt32(txtMaxCount.Text), getsched.ID, isCheck, image);
                 }
                 else
                 {
@@ -115,6 +117,21 @@ namespace AdditionalEducation.Pages.AdminControl
         private void CBTimeHour_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnAddImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.FilterIndex = 1;
+            if (ofd.ShowDialog() == true)
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(ofd.FileName);
+                bitmapImage.EndInit();
+                imgSection.Source = bitmapImage;
+                image = File.ReadAllBytes(ofd.FileName);
+            }
         }
     }
 }

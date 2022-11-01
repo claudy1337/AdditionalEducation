@@ -34,7 +34,7 @@ namespace AdditionalEducation.Data.Classes
                 DBConnection.connect.SaveChanges();
             }
         }
-        public static void AddSection(string title, int cabinet, int maxCount ,int schedule, bool isActive)
+        public static void AddSection(string title, int cabinet, int maxCount ,int schedule, bool isActive, byte[] image)
         {
             var getSectionTitle = GetSection(cabinet, schedule, title);
             var getSection = GetSection(cabinet, schedule);
@@ -46,7 +46,8 @@ namespace AdditionalEducation.Data.Classes
                     CabinetID = cabinet,
                     MaxCountOfVisitors = maxCount, 
                     ScheduleID = schedule,
-                    isActive = isActive
+                    isActive = isActive,
+                    Image = image
                 };
                 CurrentSection = section;
                 DBConnection.connect.Section.Add(section);

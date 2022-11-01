@@ -18,7 +18,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="450"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <Grid Height="380">
@@ -92,9 +92,11 @@
                              Click="btnEditOrAdd_Click"
                              Grid.Row="2" VerticalAlignment="Center"/>
 
+                    <Button x:Name="btnAddImage" Click="btnAddImage_Click" Content="uploadImage" Width="100" Margin="20,0,0,0"/>
+
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Image x:Name="imgSection" Source="{Binding Image}" Grid.Column="1" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
+        <Image x:Name="imgSection" Source="/Resources/default_section.png/" Grid.Column="1" Margin="10" RenderOptions.BitmapScalingMode="HighQuality"/>
     </Grid>
 </Page>

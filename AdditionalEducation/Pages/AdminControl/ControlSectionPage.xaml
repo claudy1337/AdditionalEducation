@@ -38,7 +38,7 @@
                             <TextBlock Text="Title" FontSize="15" Margin="0,0,0,5"/>
                             <TextBox x:Name="txtTitle" Text="{Binding Title}"/>
                             <TextBlock Text="Max Count" FontSize="15" Margin="0,10,0,5"/>
-                            <TextBox MaxLength="2" TextInput="txtMaxCount_TextInput" x:Name="txtMaxCount" Text="{Binding MaxCountOfVisitors}"/>
+                            <TextBox MaxLength="2" Text="{Binding MaxCountOfVisitors}" TextInput="txtMaxCount_TextInput" x:Name="txtMaxCount"/>
                             <TextBlock Text="Cabinet" FontSize="15" Margin="0,10,0,5"/>
                             <ComboBox x:Name="cbCabinet" Text="{Binding Cabinet.Title}" DisplayMemberPath="Title" Height="40">
                                 <ComboBox.ItemContainerStyle>

@@ -47,6 +47,7 @@ namespace AdditionalEducation.Pages.AdminControl
         {
             txtEditOrAdd.Text = "Edit Section";
             btnEditOrAdd.Content = "Edit";
+            cbCabinet.SelectedIndex = Section.CabinetID;
             this.DataContext = Section;
             if (Section.isActive == true)
             {

@@ -38,7 +38,7 @@ namespace AdditionalEducation.Pages.AdminControl
             }
             else
             {
-                var selectDay = CBDayOfWeek.SelectedItem as Data.Model.DayOfWeek;
+                var selectDay = CBDayOfWeek.SelectedItem as Data.Model.DayOfWeeks;
                 var selectMin = CBMinutes.SelectedItem as Data.Model.TimeMinutes;
                 var selectHour = CBHour.SelectedItem as Data.Model.TimeHour;
                 DBMethodsFromShedule.AddOrEditSchedule(selectDay.ID, selectMin.id, selectHour.id);
@@ -50,7 +50,7 @@ namespace AdditionalEducation.Pages.AdminControl
             lstvSchedule.ItemsSource = DBConnection.connect.Schedule.ToList();
             CBHour.ItemsSource = DBConnection.connect.TimeHour.ToList();
             CBMinutes.ItemsSource = DBConnection.connect.TimeMinutes.ToList();
-            CBDayOfWeek.ItemsSource = DBConnection.connect.DayOfWeek.ToList();
+            CBDayOfWeek.ItemsSource = DBConnection.connect.DayOfWeeks.ToList();
         }
     }
 }

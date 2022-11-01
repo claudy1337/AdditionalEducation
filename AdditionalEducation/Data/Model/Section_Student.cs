@@ -18,7 +18,7 @@ namespace AdditionalEducation.Data.Model
         public int StudentID { get; set; }
         public Nullable<bool> IsActive { get; set; }
     
-        public virtual Student Student { get; set; }
         public virtual Section Section { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

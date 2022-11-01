@@ -12,10 +12,10 @@ namespace AdditionalEducation.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class DayOfWeek
+    public partial class DayOfWeeks
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DayOfWeek()
+        public DayOfWeeks()
         {
             this.Schedule = new HashSet<Schedule>();
         }

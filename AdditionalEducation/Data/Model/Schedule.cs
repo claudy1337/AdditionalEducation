@@ -25,10 +25,10 @@ namespace AdditionalEducation.Data.Model
         public int idTimeHour { get; set; }
         public Nullable<int> idTimeMin { get; set; }
     
-        public virtual DayOfWeek DayOfWeek { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Section> Section { get; set; }
+        public virtual DayOfWeeks DayOfWeeks { get; set; }
         public virtual TimeHour TimeHour { get; set; }
         public virtual TimeMinutes TimeMinutes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Section> Section { get; set; }
     }
 }

@@ -54,7 +54,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                        <TextBlock Text="{Binding DayOfWeek.Title}" FontSize="25" Margin="0,0,20,0" Foreground="White"/>
+                        <TextBlock Text="{Binding DayOfWeeks.Title}" FontSize="25" Margin="0,0,20,0" Foreground="White"/>
                         <TextBlock Text="{Binding TimeHour.Hour}" FontSize="25" Margin="0,0,10,0" Foreground="White"/>
                         <TextBlock Text=":" FontSize="25" Foreground="White"/>
                         <TextBlock Text="{Binding TimeMinutes.Min}" FontSize="25" Margin="10,0,0,0" Foreground="White"/>

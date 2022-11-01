@@ -20,6 +20,10 @@ namespace AdditionalEducation.Data.Classes
         {
             return GetSchedules().FirstOrDefault(s=>s.idTimeMin == minute && s.idTimeHour == hour && s.DayOfWeekID == day);
         }
+        public static Schedule GetSchedule(int cabinet , int hour, int minute, int day)
+        {
+            return GetSchedules().FirstOrDefault(s => s.idTimeMin == minute && s.idTimeHour == hour && s.DayOfWeekID == day);
+        }
         public static void AddOrEditSchedule(int hour, int minute, int day)
         {
             var getSchedule = GetSchedule(hour, minute, day);

@@ -38,9 +38,9 @@
                             <TextBlock Text="Title" FontSize="15" Margin="0,0,0,5"/>
                             <TextBox x:Name="txtTitle" Text="{Binding Title}"/>
                             <TextBlock Text="Max Count" FontSize="15" Margin="0,10,0,5"/>
-                            <TextBox x:Name="txtMaxCount" Text="{Binding MaxCountOfVisitors}"/>
+                            <TextBox MaxLength="2" TextInput="txtMaxCount_TextInput" x:Name="txtMaxCount" Text="{Binding MaxCountOfVisitors}"/>
                             <TextBlock Text="Cabinet" FontSize="15" Margin="0,10,0,5"/>
-                            <ComboBox x:Name="cbCabinet" Text="{Binding Cabinet.Title}" DisplayMemberPath="Type" Height="40">
+                            <ComboBox x:Name="cbCabinet" Text="{Binding Cabinet.Title}" DisplayMemberPath="Title" Height="40">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="ComboBoxItem">
                                         <Setter Property="BorderBrush" Value="White"/>
@@ -50,8 +50,8 @@
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="220">
-                            <TextBlock Text="Day Of Week" FontSize="15" Margin="0,15,0,5"/>
-                            <ComboBox x:Name="CBDayOfWeek" DisplayMemberPath="Title" Height="40">
+                            <TextBlock Text="Day Of Week" FontSize="15"/>
+                            <ComboBox x:Name="CBDayOfWeeks" DisplayMemberPath="Title" Height="40">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="ComboBoxItem">
                                         <Setter Property="BorderBrush" Value="White"/>
@@ -59,8 +59,17 @@
                                     </Style>
                                 </ComboBox.ItemContainerStyle>
                             </ComboBox>
-                            <TextBlock Text="Time" FontSize="15" Margin="0,15,0,5"/>
-                            <ComboBox x:Name="CBTime" DisplayMemberPath="Time" Height="40">
+                            <TextBlock Text="Hour" FontSize="15" Margin="0,15,0,5"/>
+                            <ComboBox x:Name="CBTimeHour" DisplayMemberPath="Hour" Height="40" SelectionChanged="CBTimeHour_SelectionChanged">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="BorderBrush" Value="White"/>
+                                        <Setter Property="Background" Value="#908282"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
+                            <TextBlock Text="Min" FontSize="15" Margin="0,15,0,5"/>
+                            <ComboBox x:Name="CBTimeMin" DisplayMemberPath="Min" Height="40">
                                 <ComboBox.ItemContainerStyle>
                                     <Style TargetType="ComboBoxItem">
                                         <Setter Property="BorderBrush" Value="White"/>

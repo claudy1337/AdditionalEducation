@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AdditionalEducation.Data.Model;
 using AdditionalEducation.Data.Classes;
+using System.Text.RegularExpressions;
 
 namespace AdditionalEducation.Pages.AdminControl
 {
@@ -24,6 +25,7 @@ namespace AdditionalEducation.Pages.AdminControl
     {
         public static Data.Model.Section Section;
         byte[] image;
+        bool isCheck = false;
         public ControlSectionPage(Data.Model.Section section)
         {
             Section = section;
@@ -36,6 +38,10 @@ namespace AdditionalEducation.Pages.AdminControl
             {
                 BindingData();
             }
+            cbCabinet.ItemsSource = DBConnection.connect.Cabinet.Where(c=>c.State == true).ToList();
+            CBDayOfWeeks.ItemsSource = DBConnection.connect.DayOfWeeks.ToList();
+            CBTimeHour.ItemsSource = DBConnection.connect.TimeHour.ToList();
+            CBTimeMin.ItemsSource = DBConnection.connect.TimeMinutes.ToList();
         }
         private void BindingData()
         {
@@ -57,10 +63,55 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void btnEditOrAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            if (Section.isActive == null || Section.MaxCountOfVisitors == null || Section.Title == null)
+            {
+                var selectCabinet = cbCabinet.SelectedItem as Cabinet;
+                var selectHour = CBTimeHour.SelectedItem as TimeHour;
+                var selectMin = CBTimeMin.SelectedItem as TimeMinutes;
+                var selectDay = CBDayOfWeeks.SelectedItem as DayOfWeeks;
+                var getsched = DBMethodsFromShedule.GetSchedule(selectHour.id, selectMin.id, selectDay.ID);
+                if (getsched != null)
+                {
+                    DBMethodsFromSection.AddSection(txtTitle.Text, selectCabinet.ID, Convert.ToInt32(txtMaxCount.Text), getsched.ID, isCheck);
+                }
+                else
+                {
+                    MessageBox.Show("время не согласовано");
+                }
+                 
+            }
+            else
+            {
+                DBMethodsFromSection.AddImage(Section ,image);
+            }
         }
 
         private void CBIsActice_Checked(object sender, RoutedEventArgs e)
+        {
+            CBIsActice.IsChecked = true;
+            isCheck = true;
+        }
+
+        private void txtMaxCount_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            try
+            {
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
+                Regex regex = new Regex("[^1-9]+");
+                e.Handled = regex.IsMatch(e.Text);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("0 is not count");
+                return;
+            }
+        }
+
+        private void CBTimeHour_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

@@ -21,7 +21,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Center" Height="300" HorizontalAlignment="Center">
             <TextBlock Text="Cabinet" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,50"/>
-            <TextBlock Text="Title" FontSize="20" Margin="0,0,0,5"/>
+            <TextBlock Text="Number" FontSize="20" Margin="0,0,0,5"/>
             <TextBox x:Name="txtTitle" Text="{Binding Title}"/>
             <CheckBox Content="State" Checked="CBState_Checked" x:Name="CBState" Foreground="White" FontSize="20" Margin="0,15,0,40"/>
             <Button x:Name="btnAddCabinet" Click="btnAddCabinet_Click" Grid.Row="2" Content="Add" HorizontalAlignment="Center"/>

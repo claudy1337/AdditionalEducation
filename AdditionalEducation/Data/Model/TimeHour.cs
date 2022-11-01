@@ -17,13 +17,13 @@ namespace AdditionalEducation.Data.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TimeHour()
         {
-            this.Time = new HashSet<Time>();
+            this.Schedule = new HashSet<Schedule>();
         }
     
         public int id { get; set; }
         public Nullable<int> Hour { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Time> Time { get; set; }
+        public virtual ICollection<Schedule> Schedule { get; set; }
     }
 }

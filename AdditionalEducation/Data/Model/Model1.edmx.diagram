@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="schoolModel.Student" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="schoolModel.sysdiagrams" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="schoolModel.Teacher" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="schoolModel.Time" Width="1.5" PointX="1.5" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="schoolModel.User" Width="1.5" PointX="13" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="schoolModel.FK_User_Authorization" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.FK_History_Cabinet" ManuallyRouted="false" />
@@ -25,7 +24,6 @@
         <AssociationConnector Association="schoolModel.FK_History_Student" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.FK_History_Teacher" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="schoolModel.FK_Schedule_Time" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.FK_Section_Student_Student" ManuallyRouted="false" />
         <AssociationConnector Association="schoolModel.FK_Teacher_User" />
         <EntityTypeShape EntityType="schoolModel.TypeTeacher" Width="1.5" PointX="6.375" PointY="0.875" />
@@ -37,9 +35,9 @@
         <AssociationConnector Association="schoolModel.Section_Teacher" />
         <EntityTypeShape EntityType="schoolModel.TimeHour" Width="1.5" PointX="0.75" PointY="15" />
         <EntityTypeShape EntityType="schoolModel.TimeMinutes" Width="1.5" PointX="0.75" PointY="7.625" />
-        <AssociationConnector Association="schoolModel.FK_Time_TimeHour" />
-        <AssociationConnector Association="schoolModel.FK_Time_TimeMinutes" />
-      </Diagram>
+        <AssociationConnector Association="schoolModel.FK_Schedule_TimeHour" />
+        <AssociationConnector Association="schoolModel.FK_Schedule_TimeMinutes" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

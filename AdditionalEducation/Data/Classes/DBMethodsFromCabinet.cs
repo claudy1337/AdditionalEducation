@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using AdditionalEducation.Data.Classes;
 using AdditionalEducation.Data.Model;
 
@@ -40,11 +41,11 @@ namespace AdditionalEducation.Data.Classes
                 };
                 DBConnection.connect.Cabinet.Add(cabinet);
                 DBConnection.connect.SaveChanges();
-                //MessageBox.Show("добавлен");
+                MessageBox.Show("добавлен");
             }
             else
             {
-                //MessageBox.Show("уже существует");
+                MessageBox.Show("уже существует");
                 return;
             }
         }
@@ -55,7 +56,7 @@ namespace AdditionalEducation.Data.Classes
             {
                 getCabinetTitle.State = state;
                 DBConnection.connect.SaveChanges();
-                //MessageBox.Show("изменен");
+                MessageBox.Show("изменен");
             }
 
         }

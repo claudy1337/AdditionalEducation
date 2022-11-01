@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using AdditionalEducation.Data.Classes;
 using AdditionalEducation.Data.Model;
 namespace AdditionalEducation.Data.Classes
@@ -31,13 +32,13 @@ namespace AdditionalEducation.Data.Classes
                     isActive = isActive
                 };
                 CurrentTeacher = teacher;
-                //MessageBox.Show("учитель добавлен");
+                MessageBox.Show("учитель добавлен");
                 DBConnection.connect.Teacher.Add(teacher);
                 DBConnection.connect.SaveChanges();
             }
             else
             {
-               // MessageBox.Show("данные уже существуют");
+                MessageBox.Show("данные уже существуют");
                 return;
             }
         }

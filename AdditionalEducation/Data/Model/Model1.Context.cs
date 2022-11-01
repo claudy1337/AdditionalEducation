@@ -36,7 +36,6 @@ namespace AdditionalEducation.Data.Model
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
-        public virtual DbSet<Time> Time { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<TypeTeacher> TypeTeacher { get; set; }
         public virtual DbSet<Section> Section { get; set; }

@@ -31,12 +31,25 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void btnAddTime_Click(object sender, RoutedEventArgs e)
         {
-
+            if (CBDayOfWeek.SelectedIndex == -1 || CBHour.SelectedIndex == -1 || CBMinutes.SelectedIndex == -1)
+            {
+                MessageBox.Show("есть пустое значение");
+                return;
+            }
+            else
+            {
+                var selectDay = CBDayOfWeek.SelectedItem as Data.Model.DayOfWeek;
+                var selectMin = CBMinutes.SelectedItem as Data.Model.TimeMinutes;
+                var selectHour = CBHour.SelectedItem as Data.Model.TimeHour;
+                DBMethodsFromShedule.AddOrEditSchedule(selectDay.ID, selectMin.id, selectHour.id);
+                NavigationService.Navigate(new TimetablePage());
+            }
         }
         private void BindingData()
         {
-            CBHour.ItemsSource = DBConnection.connect.Time.ToList();
-            CBMinutes.ItemsSource = DBConnection.connect.Time.ToList();
+            lstvSchedule.ItemsSource = DBConnection.connect.Schedule.ToList();
+            CBHour.ItemsSource = DBConnection.connect.TimeHour.ToList();
+            CBMinutes.ItemsSource = DBConnection.connect.TimeMinutes.ToList();
             CBDayOfWeek.ItemsSource = DBConnection.connect.DayOfWeek.ToList();
         }
     }

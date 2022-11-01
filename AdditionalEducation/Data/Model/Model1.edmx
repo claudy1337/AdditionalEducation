@@ -59,7 +59,8 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DayOfWeekID" Type="int" Nullable="false" />
-          <Property Name="TimeID" Type="int" Nullable="false" />
+          <Property Name="idTimeHour" Type="int" Nullable="false" />
+          <Property Name="idTimeMin" Type="int" />
         </EntityType>
         <EntityType Name="Section">
           <Key>
@@ -119,14 +120,6 @@
           <Property Name="idUser" Type="int" />
           <Property Name="idTypeTeacher" Type="int" />
           <Property Name="isActive" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Time">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="TimeHour" Type="int" />
-          <Property Name="TimeMinutes" Type="int" />
         </EntityType>
         <EntityType Name="TimeHour">
           <Key>
@@ -209,15 +202,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Schedule_Time">
-          <End Role="Time" Type="Self.Time" Multiplicity="1" />
+        <Association Name="FK_Schedule_TimeHour">
+          <End Role="TimeHour" Type="Self.TimeHour" Multiplicity="1" />
           <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Time">
-              <PropertyRef Name="ID" />
+            <Principal Role="TimeHour">
+              <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Schedule">
-              <PropertyRef Name="TimeID" />
+              <PropertyRef Name="idTimeHour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_TimeMinutes">
+          <End Role="TimeMinutes" Type="Self.TimeMinutes" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeMinutes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="idTimeMin" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -329,30 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Time_TimeHour">
-          <End Role="TimeHour" Type="Self.TimeHour" Multiplicity="0..1" />
-          <End Role="Time" Type="Self.Time" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TimeHour">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Time">
-              <PropertyRef Name="TimeHour" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Time_TimeMinutes">
-          <End Role="TimeMinutes" Type="Self.TimeMinutes" Multiplicity="0..1" />
-          <End Role="Time" Type="Self.Time" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TimeMinutes">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Time">
-              <PropertyRef Name="TimeMinutes" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_Authorization">
           <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -391,7 +372,6 @@
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Time" EntityType="Self.Time" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeHour" EntityType="Self.TimeHour" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TimeMinutes" EntityType="Self.TimeMinutes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeTeacher" EntityType="Self.TypeTeacher" Schema="dbo" store:Type="Tables" />
@@ -412,8 +392,12 @@
             <End Role="DayOfWeek" EntitySet="DayOfWeek" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_Schedule_Time" Association="Self.FK_Schedule_Time">
-            <End Role="Time" EntitySet="Time" />
+          <AssociationSet Name="FK_Schedule_TimeHour" Association="Self.FK_Schedule_TimeHour">
+            <End Role="TimeHour" EntitySet="TimeHour" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_TimeMinutes" Association="Self.FK_Schedule_TimeMinutes">
+            <End Role="TimeMinutes" EntitySet="TimeMinutes" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
           <AssociationSet Name="FK_Section_Cabinet" Association="Self.FK_Section_Cabinet">
@@ -451,14 +435,6 @@
           <AssociationSet Name="FK_Teacher_User" Association="Self.FK_Teacher_User">
             <End Role="User" EntitySet="User" />
             <End Role="Teacher" EntitySet="Teacher" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Time_TimeHour" Association="Self.FK_Time_TimeHour">
-            <End Role="TimeHour" EntitySet="TimeHour" />
-            <End Role="Time" EntitySet="Time" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Time_TimeMinutes" Association="Self.FK_Time_TimeMinutes">
-            <End Role="TimeMinutes" EntitySet="TimeMinutes" />
-            <End Role="Time" EntitySet="Time" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Authorization" Association="Self.FK_User_Authorization">
             <End Role="Authorization" EntitySet="Authorization" />
@@ -536,10 +512,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DayOfWeekID" Type="Int32" Nullable="false" />
-          <Property Name="TimeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DayOfWeek" Relationship="Self.FK_Schedule_DayOfWeek" FromRole="Schedule" ToRole="DayOfWeek" />
-          <NavigationProperty Name="Time" Relationship="Self.FK_Schedule_Time" FromRole="Schedule" ToRole="Time" />
           <NavigationProperty Name="Section" Relationship="schoolModel.FK_Section_Schedule" FromRole="Schedule" ToRole="Section" />
+          <Property Name="idTimeHour" Type="Int32" Nullable="false" />
+          <Property Name="idTimeMin" Type="Int32" />
+          <NavigationProperty Name="TimeHour" Relationship="schoolModel.FK_Schedule_TimeHour" FromRole="Schedule" ToRole="TimeHour" />
+          <NavigationProperty Name="TimeMinutes" Relationship="schoolModel.FK_Schedule_TimeMinutes" FromRole="Schedule" ToRole="TimeMinutes" />
         </EntityType>
         <EntityType Name="Section_Student">
           <Key>
@@ -588,17 +566,6 @@
           <NavigationProperty Name="TypeTeacher" Relationship="schoolModel.FK_Teacher_TypeTeacher" FromRole="Teacher" ToRole="TypeTeacher" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Section" Relationship="schoolModel.Section_Teacher" FromRole="Teacher" ToRole="Section" />
-        </EntityType>
-        <EntityType Name="Time">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Schedule" Relationship="Self.FK_Schedule_Time" FromRole="Time" ToRole="Schedule" />
-          <Property Name="TimeHour" Type="Int32" />
-          <Property Name="TimeMinutes" Type="Int32" />
-          <NavigationProperty Name="TimeHour1" Relationship="schoolModel.FK_Time_TimeHour" FromRole="Time" ToRole="TimeHour" />
-          <NavigationProperty Name="TimeMinutes1" Relationship="schoolModel.FK_Time_TimeMinutes" FromRole="Time" ToRole="TimeMinutes" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -699,18 +666,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Schedule_Time">
-          <End Role="Time" Type="Self.Time" Multiplicity="1" />
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Time">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Schedule">
-              <PropertyRef Name="TimeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Section_Student_Student">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Section_Student" Type="Self.Section_Student" Multiplicity="*" />
@@ -735,7 +690,6 @@
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" />
-          <EntitySet Name="Time" EntityType="Self.Time" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_User_Authorization" Association="Self.FK_User_Authorization">
             <End Role="Authorization" EntitySet="Authorization" />
@@ -764,10 +718,6 @@
           <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Schedule_Time" Association="Self.FK_Schedule_Time">
-            <End Role="Time" EntitySet="Time" />
-            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
           <AssociationSet Name="FK_Section_Student_Student" Association="Self.FK_Section_Student_Student">
             <End Role="Student" EntitySet="Student" />
@@ -801,13 +751,13 @@
           </AssociationSet>
           <EntitySet Name="TimeHour" EntityType="schoolModel.TimeHour" />
           <EntitySet Name="TimeMinutes" EntityType="schoolModel.TimeMinutes" />
-          <AssociationSet Name="FK_Time_TimeHour" Association="schoolModel.FK_Time_TimeHour">
+          <AssociationSet Name="FK_Schedule_TimeHour" Association="schoolModel.FK_Schedule_TimeHour">
             <End Role="TimeHour" EntitySet="TimeHour" />
-            <End Role="Time" EntitySet="Time" />
+            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_Time_TimeMinutes" Association="schoolModel.FK_Time_TimeMinutes">
+          <AssociationSet Name="FK_Schedule_TimeMinutes" Association="schoolModel.FK_Schedule_TimeMinutes">
             <End Role="TimeMinutes" EntitySet="TimeMinutes" />
-            <End Role="Time" EntitySet="Time" />
+            <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Teacher_User">
@@ -904,7 +854,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Hour" Type="Int32" />
-          <NavigationProperty Name="Time" Relationship="schoolModel.FK_Time_TimeHour" FromRole="TimeHour" ToRole="Time" />
+          <NavigationProperty Name="Schedule" Relationship="schoolModel.FK_Schedule_TimeHour" FromRole="TimeHour" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="TimeMinutes">
           <Key>
@@ -912,29 +862,29 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Min" Type="Int32" />
-          <NavigationProperty Name="Time" Relationship="schoolModel.FK_Time_TimeMinutes" FromRole="TimeMinutes" ToRole="Time" />
+          <NavigationProperty Name="Schedule" Relationship="schoolModel.FK_Schedule_TimeMinutes" FromRole="TimeMinutes" ToRole="Schedule" />
         </EntityType>
-        <Association Name="FK_Time_TimeHour">
-          <End Type="schoolModel.TimeHour" Role="TimeHour" Multiplicity="0..1" />
-          <End Type="schoolModel.Time" Role="Time" Multiplicity="*" />
+        <Association Name="FK_Schedule_TimeHour">
+          <End Type="schoolModel.TimeHour" Role="TimeHour" Multiplicity="1" />
+          <End Type="schoolModel.Schedule" Role="Schedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TimeHour">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Time">
-              <PropertyRef Name="TimeHour" />
+            <Dependent Role="Schedule">
+              <PropertyRef Name="idTimeHour" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Time_TimeMinutes">
+        <Association Name="FK_Schedule_TimeMinutes">
           <End Type="schoolModel.TimeMinutes" Role="TimeMinutes" Multiplicity="0..1" />
-          <End Type="schoolModel.Time" Role="Time" Multiplicity="*" />
+          <End Type="schoolModel.Schedule" Role="Schedule" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TimeMinutes">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Time">
-              <PropertyRef Name="TimeMinutes" />
+            <Dependent Role="Schedule">
+              <PropertyRef Name="idTimeMin" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1001,9 +951,10 @@
           <EntitySetMapping Name="Schedule">
             <EntityTypeMapping TypeName="schoolModel.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="idTimeMin" ColumnName="idTimeMin" />
+                <ScalarProperty Name="idTimeHour" ColumnName="idTimeHour" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DayOfWeekID" ColumnName="DayOfWeekID" />
-                <ScalarProperty Name="TimeID" ColumnName="TimeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1045,15 +996,6 @@
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="idTypeTeacher" ColumnName="idTypeTeacher" />
                 <ScalarProperty Name="idUser" ColumnName="idUser" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Time">
-            <EntityTypeMapping TypeName="schoolModel.Time">
-              <MappingFragment StoreEntitySet="Time">
-                <ScalarProperty Name="TimeMinutes" ColumnName="TimeMinutes" />
-                <ScalarProperty Name="TimeHour" ColumnName="TimeHour" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

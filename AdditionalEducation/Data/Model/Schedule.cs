@@ -22,11 +22,13 @@ namespace AdditionalEducation.Data.Model
     
         public int ID { get; set; }
         public int DayOfWeekID { get; set; }
-        public int TimeID { get; set; }
+        public int idTimeHour { get; set; }
+        public Nullable<int> idTimeMin { get; set; }
     
         public virtual DayOfWeek DayOfWeek { get; set; }
-        public virtual Time Time { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Section> Section { get; set; }
+        public virtual TimeHour TimeHour { get; set; }
+        public virtual TimeMinutes TimeMinutes { get; set; }
     }
 }

@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AdditionalEducation.Data.Classes;
 using AdditionalEducation.Data.Model;
-using HandyControl.Controls;
-
 namespace AdditionalEducation.Data.Classes
 {
     internal class DBMethodsFromTeacher
@@ -33,13 +31,13 @@ namespace AdditionalEducation.Data.Classes
                     isActive = isActive
                 };
                 CurrentTeacher = teacher;
-                MessageBox.Show("учитель добавлен");
+                //MessageBox.Show("учитель добавлен");
                 DBConnection.connect.Teacher.Add(teacher);
                 DBConnection.connect.SaveChanges();
             }
             else
             {
-                MessageBox.Show("данные уже существуют");
+               // MessageBox.Show("данные уже существуют");
                 return;
             }
         }

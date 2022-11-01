@@ -32,7 +32,6 @@ namespace AdditionalEducation.Data.Model
         public virtual DbSet<History> History { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Schedule> Schedule { get; set; }
-        public virtual DbSet<Section> Section { get; set; }
         public virtual DbSet<Section_Student> Section_Student { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
@@ -40,5 +39,8 @@ namespace AdditionalEducation.Data.Model
         public virtual DbSet<Time> Time { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<TypeTeacher> TypeTeacher { get; set; }
+        public virtual DbSet<Section> Section { get; set; }
+        public virtual DbSet<TimeHour> TimeHour { get; set; }
+        public virtual DbSet<TimeMinutes> TimeMinutes { get; set; }
     }
 }

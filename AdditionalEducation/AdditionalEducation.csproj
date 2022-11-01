@@ -43,9 +43,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="HandyControl, Version=3.3.0.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
-      <HintPath>..\packages\HandyControl.3.3.0\lib\net472\HandyControl.dll</HintPath>
-    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.9.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.9\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -76,6 +73,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Classes\DBConnection.cs" />
+    <Compile Include="Data\Classes\DBMethodsFromCabinet.cs" />
+    <Compile Include="Data\Classes\DBMethodsFromSection.cs" />
     <Compile Include="Data\Classes\DBMethodsFromTeacher.cs" />
     <Compile Include="Data\Classes\DBMethodsFromUser.cs" />
     <Compile Include="Data\Model\Authorization.cs">
@@ -132,6 +131,12 @@
     <Compile Include="Data\Model\Time.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Model\TimeHour.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Model\TimeMinutes.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Model\TypeTeacher.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -141,8 +146,11 @@
     <Compile Include="Pages\Account.xaml.cs">
       <DependentUpon>Account.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminControl\ClassPage.xaml.cs">
-      <DependentUpon>ClassPage.xaml</DependentUpon>
+    <Compile Include="Pages\AdminControl\CabinetPage.xaml.cs">
+      <DependentUpon>CabinetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminControl\ControlSectionPage.xaml.cs">
+      <DependentUpon>ControlSectionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdminControl\ControlTeacherPage.xaml.cs">
       <DependentUpon>ControlTeacherPage.xaml</DependentUpon>
@@ -178,7 +186,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdminControl\ClassPage.xaml">
+    <Page Include="Pages\AdminControl\CabinetPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminControl\ControlSectionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,6 +271,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\default_section.png" />
     <Resource Include="Resources\default_user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

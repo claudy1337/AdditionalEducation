@@ -12,13 +12,18 @@ namespace AdditionalEducation.Data.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Section_Student
+    public partial class TimeHour
     {
-        public int SectionID { get; set; }
-        public int StudentID { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TimeHour()
+        {
+            this.Time = new HashSet<Time>();
+        }
     
-        public virtual Student Student { get; set; }
-        public virtual Section Section { get; set; }
+        public int id { get; set; }
+        public Nullable<int> Hour { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Time> Time { get; set; }
     }
 }

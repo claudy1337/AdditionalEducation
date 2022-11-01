@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdditionalEducation.Data.Model;
-using HandyControl.Controls;
 using Microsoft.Win32;
 
 namespace AdditionalEducation.Data.Classes
@@ -67,7 +66,7 @@ namespace AdditionalEducation.Data.Classes
                     getUser.Patronymic = patronymic;
                 }
                 DBConnection.connect.SaveChanges();
-                MessageBox.Show("данные успешно поменялись");
+                //MessageBox.Show("данные успешно поменялись");
             }
         }
         public static void AddAuth(string login, string password)

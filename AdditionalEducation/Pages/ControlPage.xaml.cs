@@ -31,7 +31,7 @@ namespace AdditionalEducation.Pages
         }
         private void ColorSet()
         {
-            txtAddClass.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(144, 130, 130));
+            txtAddCabinet.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(144, 130, 130));
             txtAddSection.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(144, 130, 130));
             txtAddTeacher.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(144, 130, 130));
             txtAddTimetable.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(144, 130, 130));
@@ -42,13 +42,6 @@ namespace AdditionalEducation.Pages
             ColorSet();
             fContainerControl.Navigate(new TeacherPage());
             txtAddTeacher.Foreground = Brushes.White;
-        }
-
-        private void txtAddClass_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ColorSet();
-            fContainerControl.Navigate(new ClassPage());
-            txtAddClass.Foreground = Brushes.White;
         }
 
         private void txtAddTimetable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -63,6 +56,13 @@ namespace AdditionalEducation.Pages
             ColorSet();
             fContainerControl.Navigate(new SectionPage());
             txtAddSection.Foreground = Brushes.White;
+        }
+
+        private void txtAddCabinet_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ColorSet();
+            fContainerControl.Navigate(new CabinetPage());
+            txtAddCabinet.Foreground = Brushes.White;
         }
     }
 }

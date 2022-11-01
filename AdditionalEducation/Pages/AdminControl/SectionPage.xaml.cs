@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AdditionalEducation.Data.Classes;
+using AdditionalEducation.Data.Model;
 
 namespace AdditionalEducation.Pages.AdminControl
 {
@@ -23,6 +25,28 @@ namespace AdditionalEducation.Pages.AdminControl
         public SectionPage()
         {
             InitializeComponent();
+            BindingData();
+        }
+        private void BindingData()
+        {
+            lstvSection.ItemsSource = DBConnection.connect.Section.ToList();
+        }
+
+        private void lstvSection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selelectSection = lstvSection.SelectedItem as Data.Model.Section;
+            NavigationService.Navigate(new ControlSectionPage(selelectSection));
+        }
+
+        private void btnAddNewSection_Click(object sender, RoutedEventArgs e)
+        {
+            Data.Model.Section section = new Data.Model.Section();
+            NavigationService.Navigate(new ControlSectionPage(section));
+        }
+
+        private void txtClear_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new SectionPage());
         }
     }
 }

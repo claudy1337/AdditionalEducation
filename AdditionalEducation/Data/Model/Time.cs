@@ -21,9 +21,12 @@ namespace AdditionalEducation.Data.Model
         }
     
         public int ID { get; set; }
-        public Nullable<System.TimeSpan> Time1 { get; set; }
+        public Nullable<int> TimeHour { get; set; }
+        public Nullable<int> TimeMinutes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Schedule> Schedule { get; set; }
+        public virtual TimeHour TimeHour1 { get; set; }
+        public virtual TimeMinutes TimeMinutes1 { get; set; }
     }
 }

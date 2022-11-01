@@ -22,7 +22,7 @@ namespace AdditionalEducation.Data.Model
         }
     
         public int ID { get; set; }
-        public int Title { get; set; }
+        public string Title { get; set; }
         public int CabinetID { get; set; }
         public Nullable<int> MaxCountOfVisitors { get; set; }
         public int ScheduleID { get; set; }

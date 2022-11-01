@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AdditionalEducation.Data.Model;
+using AdditionalEducation.Data.Classes;
+using MaterialDesignThemes.Wpf;
 
 namespace AdditionalEducation.Pages.AdminControl
 {
@@ -23,6 +26,18 @@ namespace AdditionalEducation.Pages.AdminControl
         public TimetablePage()
         {
             InitializeComponent();
+            BindingData();
+        }
+
+        private void btnAddTime_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void BindingData()
+        {
+            CBHour.ItemsSource = DBConnection.connect.Time.ToList();
+            CBMinutes.ItemsSource = DBConnection.connect.Time.ToList();
+            CBDayOfWeek.ItemsSource = DBConnection.connect.DayOfWeek.ToList();
         }
     }
 }

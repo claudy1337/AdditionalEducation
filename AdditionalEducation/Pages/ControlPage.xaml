@@ -32,15 +32,15 @@
                            Text="Teacher" 
                            FontSize="25"
                            Margin="25,0,25,0"/>
-                <TextBlock x:Name="txtAddClass"
-                           MouseLeftButtonDown="txtAddClass_MouseLeftButtonDown"
-                           Text="Class" 
+                <TextBlock x:Name="txtAddCabinet"
+                           MouseLeftButtonDown="txtAddCabinet_MouseLeftButtonDown"
+                           Text="Cabinet" 
                            FontSize="25"/>
                 <TextBlock x:Name="txtAddTimetable"
                            MouseLeftButtonDown="txtAddTimetable_MouseLeftButtonDown"
                            Text="Timetable" 
                            FontSize="25"
-                           Margin="25,0,0,0"/>
+                           Margin="25,0,25,0"/>
             </StackPanel>
             <Frame 
                BorderBrush="Transparent"

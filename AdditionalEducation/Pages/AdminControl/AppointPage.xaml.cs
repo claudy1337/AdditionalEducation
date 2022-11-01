@@ -36,9 +36,16 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var selectSection = cbSection.SelectedItem as Data.Model.Section;
-            var selectTeacher = cbTeacher.SelectedItem as Teacher;
-            DBMethodsFromSectionTeacher.AddTeacherFromSection(selectSection.ID, selectTeacher.ID);
+            if (cbSection.SelectedIndex == -1 || cbTeacher.SelectedIndex==-1)
+            {
+                MessageBox.Show("заполните все поля");
+            }
+            else
+            {
+                var selectSection = cbSection.SelectedItem as Data.Model.Section;
+                var selectTeacher = cbTeacher.SelectedItem as Teacher;
+                DBMethodsFromSectionTeacher.AddTeacherFromSection(selectSection.ID, selectTeacher.ID);
+            }
         }
 
         private void cbTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)

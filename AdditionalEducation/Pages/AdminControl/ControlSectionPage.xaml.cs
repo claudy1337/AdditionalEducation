@@ -66,26 +66,33 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void btnEditOrAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (Section.isActive == null || Section.MaxCountOfVisitors == null || Section.Title == null)
+            if (string.IsNullOrWhiteSpace(txtTitle.Text) || string.IsNullOrWhiteSpace(txtEditOrAdd.Text) || string.IsNullOrWhiteSpace(txtMaxCount.Text))
             {
-                var selectCabinet = cbCabinet.SelectedItem as Cabinet;
-                var selectHour = CBTimeHour.SelectedItem as TimeHour;
-                var selectMin = CBTimeMin.SelectedItem as TimeMinutes;
-                var selectDay = CBDayOfWeeks.SelectedItem as DayOfWeeks;
-                var getsched = DBMethodsFromShedule.GetSchedule(selectHour.id, selectMin.id, selectDay.ID);
-                if (getsched != null)
-                {
-                    DBMethodsFromSection.AddSection(txtTitle.Text, selectCabinet.ID, Convert.ToInt32(txtMaxCount.Text), getsched.ID, isCheck, image);
-                }
-                else
-                {
-                    MessageBox.Show("время не согласовано");
-                }
-                 
+                MessageBox.Show("заполните все поля");
             }
             else
             {
-                DBMethodsFromSection.AddImage(Section ,image);
+                if (Section.isActive == null || Section.MaxCountOfVisitors == null || Section.Title == null)
+                {
+                    var selectCabinet = cbCabinet.SelectedItem as Cabinet;
+                    var selectHour = CBTimeHour.SelectedItem as TimeHour;
+                    var selectMin = CBTimeMin.SelectedItem as TimeMinutes;
+                    var selectDay = CBDayOfWeeks.SelectedItem as DayOfWeeks;
+                    var getsched = DBMethodsFromShedule.GetSchedule(selectHour.id, selectMin.id, selectDay.ID);
+                    if (getsched != null)
+                    {
+                        DBMethodsFromSection.AddSection(txtTitle.Text, selectCabinet.ID, Convert.ToInt32(txtMaxCount.Text), getsched.ID, isCheck, image);
+                    }
+                    else
+                    {
+                        MessageBox.Show("время не согласовано");
+                    }
+
+                }
+                else
+                {
+                    DBMethodsFromSection.AddImage(Section, image);
+                }
             }
         }
 

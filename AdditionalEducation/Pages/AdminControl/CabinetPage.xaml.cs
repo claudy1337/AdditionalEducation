@@ -41,16 +41,23 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void btnAddCabinet_Click(object sender, RoutedEventArgs e)
         {
-            if (editData == true)
+            if (string.IsNullOrWhiteSpace(txtTitle.Text))
             {
-                var selectCabinet = lstvCabinet.SelectedItem as Cabinet;
-                DBMethodsFromCabinet.EditCabinet(selectCabinet, isState);
-                NavigationService.Navigate(new CabinetPage());
+                MessageBox.Show("заполните все поля");
             }
             else
             {
-                DBMethodsFromCabinet.AddCabinet(txtTitle.Text, isState);
-                NavigationService.Navigate(new CabinetPage());
+                if (editData == true)
+                {
+                    var selectCabinet = lstvCabinet.SelectedItem as Cabinet;
+                    DBMethodsFromCabinet.EditCabinet(selectCabinet, isState);
+                    NavigationService.Navigate(new CabinetPage());
+                }
+                else
+                {
+                    DBMethodsFromCabinet.AddCabinet(txtTitle.Text, isState);
+                    NavigationService.Navigate(new CabinetPage());
+                }
             }
         }
 

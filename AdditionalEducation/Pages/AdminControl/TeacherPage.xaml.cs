@@ -61,8 +61,8 @@ namespace AdditionalEducation.Pages.AdminControl
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Teacher teacher = new Teacher();
-            NavigationService.Navigate(new ControlTeacherPage(teacher));
+                Teacher teacher = new Teacher();
+                NavigationService.Navigate(new ControlTeacherPage(teacher));
         }
 
         private void cbActiveTeacher_SelectionChanged(object sender, SelectionChangedEventArgs e)

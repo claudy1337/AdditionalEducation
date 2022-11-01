@@ -39,6 +39,7 @@ namespace AdditionalEducation.Pages.AdminControl
             else
             {
                 BindingData();
+                txtLogin.IsReadOnly = true;
             }
             cbTypeTeacher.ItemsSource = DBConnection.connect.TypeTeacher.ToList();
             

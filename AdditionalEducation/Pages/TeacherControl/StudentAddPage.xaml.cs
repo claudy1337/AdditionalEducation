@@ -24,5 +24,10 @@ namespace AdditionalEducation.Pages.TeacherControl
         {
             InitializeComponent();
         }
+
+        private void btnAddStudent_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

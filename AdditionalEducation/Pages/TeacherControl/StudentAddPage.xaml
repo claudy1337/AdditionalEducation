@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:AdditionalEducation.Pages.TeacherControl"
       mc:Ignorable="d" 
       d:DesignHeight="480" d:DesignWidth="830"
-      Title="StudentAddPage">
+      Title="StudentAddPage"
+      xmlns:material="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="#908282"/>
@@ -18,21 +19,39 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            
-        </StackPanel>
-        <ListView Grid.Column="1" x:Name="lstvStudent">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="0,0,0,10">
-                        <TextBlock Text="{Binding Name}" Foreground="White" FontSize="15"/>
-                        <TextBlock Text="{Binding Surname}" Foreground="White" FontSize="15"/>
-                        <TextBlock Text="{Binding Patronymic}" Foreground="White" FontSize="15"/>
-                        <TextBlock Text="{Binding Class.Number}" Foreground="White" FontSize="15"/>
-                        <TextBlock Text="{Binding Class.Сharacter}" Foreground="White" FontSize="15"/>
+        <StackPanel Grid.Column="0" VerticalAlignment="Center">
+            <material:Card Width="315" Height="450" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Account" FontSize="25" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0"/>
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="Name" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
+                        <TextBox Text="{Binding Name}" x:Name="txtName"/>
+                        <TextBlock Text="Last Name" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
+                        <TextBox Text="{Binding Surname}" x:Name="txtSurname"/>
+                        <TextBlock Text="Patronymic" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
+                        <TextBox Text="{Binding Patronymic}" x:Name="txtPatronymic"/>
+                        <TextBlock Text="Class Number" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
+                        <TextBox Text="{Binding Class.Number}" x:Name="txtClassNumber"/>
+                        <TextBlock Text="Class Сharacter" Foreground="White" FontSize="15" Margin="0,10,0,0"/>
+                        <TextBox Text="{Binding Class.Сharacter}" x:Name="txtClassСharacter"/>
                     </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                </Grid>
+            </material:Card>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Grid Height="480">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <ListView>
+                </ListView>
+                <Button Grid.Row="1" Content="Add" x:Name="btnAddStudent" Click="btnAddStudent_Click"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

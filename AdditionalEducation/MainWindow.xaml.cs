@@ -16,6 +16,7 @@ using AdditionalEducation.Data.Model;
 using AdditionalEducation.Data.Classes;
 using AdditionalEducation.Pages;
 using AdditionalEducation.Windws;
+using AdditionalEducation.Pages.TeacherControl;
 
 namespace AdditionalEducation
 {
@@ -116,7 +117,7 @@ namespace AdditionalEducation
         private void txtStudent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
+            fContainer.Navigate(new StudentAddPage());
             txtStudent.Foreground = Brushes.White;
         }
     }

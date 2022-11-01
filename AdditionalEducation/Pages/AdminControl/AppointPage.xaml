@@ -54,7 +54,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Vertical">
-                                <TextBlock Text="Section" FontSize="20"/>
+                                <TextBlock Text="Section" FontSize="20" Foreground="White"/>
                                 <StackPanel Height="350">
                                     <Grid Height="350">
                                         <Grid.RowDefinitions>
@@ -75,7 +75,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Vertical">
-                                <TextBlock Text="Teacher" FontSize="20"/>
+                                <TextBlock Text="Teacher" FontSize="20" Foreground="White"/>
                                 <Grid Height="350">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>

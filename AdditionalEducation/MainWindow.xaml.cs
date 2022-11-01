@@ -96,7 +96,7 @@ namespace AdditionalEducation
         private void txtSection_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ColorSet();
-
+            fContainer.Navigate(new TimeTablePage(CurrentUser));
             txtSection.Foreground = Brushes.White;
         }
 

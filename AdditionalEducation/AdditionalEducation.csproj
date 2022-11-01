@@ -175,6 +175,9 @@
     <Compile Include="Pages\TeacherControl\StudentAddPage.xaml.cs">
       <DependentUpon>StudentAddPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TeacherControl\TimeTablePage.xaml.cs">
+      <DependentUpon>TimeTablePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windws\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
     </Compile>
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TeacherControl\StudentAddPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TeacherControl\TimeTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

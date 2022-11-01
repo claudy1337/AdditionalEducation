@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdditionalEducation.Data.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,14 @@ namespace AdditionalEducation.Pages.TeacherControl
 
         private void btnAddStudent_Click(object sender, RoutedEventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(txtClassNumber.Text) || string.IsNullOrWhiteSpace(txtSurname.Text) || string.IsNullOrWhiteSpace(txtPatronymic.Text))
+            {
+                MessageBox.Show("заполните все поля");
+            }
+            else
+            {
+                
+            }
         }
     }
 }

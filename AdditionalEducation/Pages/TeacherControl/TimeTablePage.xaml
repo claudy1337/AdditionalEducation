@@ -1,0 +1,45 @@
+﻿<Page x:Class="AdditionalEducation.Pages.TeacherControl.TimeTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdditionalEducation.Pages.TeacherControl"
+      mc:Ignorable="d" 
+      d:DesignHeight="480" d:DesignWidth="830"
+      Title="TimeTablePage">
+
+    <Grid>
+        <ListView x:Name="lstvTimeTable">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Section.Schedule.DayOfWeeks.Title}" Foreground="White" FontSize="25"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Section.Schedule.TimeHour.Hour}" Foreground="White" FontSize="25" Margin="0,0,0,0"/>
+                                    <TextBlock Text=":" Foreground="White" FontSize="25"/>
+                                    <TextBlock Text="{Binding Section.Schedule.TimeMinutes.Min}" Foreground="White" FontSize="25"/>
+
+                                </StackPanel>
+                                <TextBlock Text="{Binding Teacher.User.Name}" Foreground="White" FontSize="25"/>
+                                <TextBlock Text="{Binding Teacher.User.Surname}" Foreground="White" FontSize="25"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Cabinet: " Foreground="White" FontSize="25"/>
+                                    <TextBlock Text="{Binding Section.Cabinet.Title}" Foreground="White" FontSize="25"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Section.Title}" Foreground="White" FontSize="25"/>
+                            </StackPanel>
+                            <Image Grid.Column="1" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Section.Image}" Width="225" Height="325"/>
+                        </Grid>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
